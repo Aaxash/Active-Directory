@@ -1,4 +1,6 @@
 
+# Targeted Kerberoasting
+
 Targeted Kerberoasting is an attack technique that leverages an attacker’s existing access to an account with specific permissions to make other accounts vulnerable to traditional Kerberoasting attacks.
 
 - The key to this attack is exploiting the rights of an account that can modify Service Principal Names (SPNs) of other accounts in an Active Directory (AD) environment.
@@ -15,17 +17,21 @@ The exploitation process in Targeted Kerberoasting is as follows:
 
 
 
-
-![[Pasted image 20250721122403.png]]
-
-![[Pasted image 20250721122420.png]]
-
+## Exploitation
 
 - SQLSRV has generic write access on jack.
+
+![image info](../assets/Pasted%20image%2020250721122403.png)
+
+![image info](../assets/Pasted%20image%2020250721122420.png)
+
 - SQLSRV can add an SPN on jack account, request a Service Ticket for jack account and then remove the SPN from jack account.
+
+![image info](../assets/Pasted%20image%2020250721122618.png)
+
 - And try cracking the Service Ticket to recover the jack password.
 
-A tool automate this is targetedKerberoast.py https://github.com/ShutdownRepo/targetedKerberoast
+![image info](../assets/Pasted%20image%2020250721122956.png)
 
-![[Pasted image 20250721122618.png]]
-![[Pasted image 20250721122956.png]]
+A tool to automate this is targetedKerberoast.py https://github.com/ShutdownRepo/targetedKerberoast
+

