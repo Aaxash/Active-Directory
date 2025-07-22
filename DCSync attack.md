@@ -1,5 +1,3 @@
- 
-
 # **DCSync Attack**
 
 A DCSync attack uses commands in Microsoft Directory Replication Service Remote Protocol (MS-DRSR) to pretend to be a domain controller (DC) in order to get user credentials from another DC.

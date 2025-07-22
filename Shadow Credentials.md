@@ -91,7 +91,3 @@ The attacker needs permissions like **GenericWrite** or **GenericAll**  over
 4. Using alice TGT to get shell on DC01.
 
 ![image info](./assets/Pasted%20image%2020250721180400.png)
-
-
-
-

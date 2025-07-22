@@ -1,5 +1,5 @@
-
 # Kerberoasting
+
 Kerberoasting is an attack that targets the Kerberos authentication protocol to extract service account credentials. 
 
 - The attack exploits the way Kerberos handles service tickets (TGS-REP). 

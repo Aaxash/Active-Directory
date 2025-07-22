@@ -1,4 +1,3 @@
-
 ## **Double Hop Problem**
 
 The **Double Hop Problem** refers to a specific issue that arises in networked environments, particularly those using Windows authentication protocols like Kerberos or NTLM. It occurs when a user's credentials need to be passed from the client to a first server (hop 1) and then from that first server to a second server (hop 2), but the credentials cannot be delegated beyond the first server.
@@ -61,5 +60,4 @@ Identifying systems that are configured for Unconstrained Delegation is easy wit
 1. Compromise the Server via an local admin, service account or computer account.
 2. Trick a Domain Admin to connect to any service on the server with unconstrained delegation.
 3. Then you can extract the domain admin TGT from LSASS.
-
 
