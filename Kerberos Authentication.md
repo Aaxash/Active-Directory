@@ -3,7 +3,21 @@
 Kerberos is a network authentication protocol that uses cryptographic tickets to verify user identities and grant access to services, It relies on a trusted third-party, the Key Distribution Center (KDC), to issue and manage these tickets, ensuring secure communication between clients and servers.
 # How Kerberos Authentication Works
 
-![image info](./assets/Pasted%20image%2020250722112011.png)
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant DC
+    participant Service
+
+    User->>DC: "I'm Alice, TimeStamp encrypted with password hash"
+    DC->>User: "Here’s a TGT (encrypted with krbtgt password hash)."
+    User->>DC: "Here’s my TGT, I need access to 'Database'."
+    DC->>User: "Here’s a ticket for 'Database'."
+    User->>Service: "Here’s my Database ticket."
+    Service->>User: "Access granted!"
+```
+
 
 1. **AS REQ:** Client sends a AS REQ with a Timestamp Encrypted with key derived from client's password hash.
 2. **AS REP:** KDC Decrypts the Timestamp to verify user identity, as KDC knows client's password, If timestamp gets decrypted KDC responds with a TGT encrypted with a key derived with krbtgt's account password hash + a session key encrypted with user's password hash.
