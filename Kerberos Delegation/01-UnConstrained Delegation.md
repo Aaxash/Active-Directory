@@ -9,6 +9,13 @@ Imagine a web application where:
 
 Server A can't authenticate to Server B as the user (bob), resulting in the double hop problem.
 
+```mermaid
+flowchart LR
+    User -->|Authenticates to Webserver| WebServer
+    WebServer -.->|Can't Access| Database
+    style Database stroke-dasharray: 5 5  
+```
+
 ## **Kerberos Delegation**
 
 Delegation is the act of giving someone authority or responsibility to do something on behalf of someone else. A similar concept is applied in the Active Directory environment; delegation allows an account with the delegate property to impersonate another account to access resources within the network.
@@ -33,10 +40,17 @@ Kerberos delegation is a feature in **Active Directory (AD)** that allows a se
 
 - The reason TGTs get cached in memory is so that the service computer (with delegation rights) can impersonate the authenticated user as and when required for accessing any other services on that user's behalf.
 
-![image info](../assets/Pasted%20image%2020250714170217.png)
+```mermaid
+flowchart LR
+    User -->|Authenticates to Webserver| WebServer
+    WebServer -.->|Delegates User TGT| Service1
+    WebServer -.->|Delegates User TGT| Service2
+    style Service1 stroke-dasharray: 5 5  
+    style Service2 stroke-dasharray: 5 5  
+```
+
 
 ![image info](../assets/Pasted%20image%2020250709090243.png)
-
 
 1. User (bob) Send AS-REQ to get a TGT from DC.
 2. User (bob) Gets the TGT from DC.
