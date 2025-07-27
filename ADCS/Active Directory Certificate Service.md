@@ -103,11 +103,14 @@ The second set of restrictions shown in the issuance requirements are the settin
 - "This number of authorized signatures" controls the number of signatures required in the CSR for the CA to accept it. 
 - "Application policy" defines the EKU OIDs that the CSR signing certificate must have. 
 
+![[Pasted image 20250727231925.png]]
+
 A Common use for these both settings is for enrollment agents. 
 
-- Enrollment Agents are privileged entities (users or computers) authorized to **request certificates on behalf of other users**. 
+- Enrollment Agents are privileged entities users or computers (Think of them as Helpdesk users) authorized to **request certificates on behalf of other users**. 
 - To do so, the CA must issue the enrollment agent user/computer account a certificate containing at least the Certificate Request Agent EKU (OID 1.3.6.1.4.1.311.20.2.1). 
-- Once issued, the enrollment agent can then sign CSRs and request certificates on behalf of other users. 
+- Once issued, the enrollment agent can then sign CSRs on behalf of other user and request certificates for other users. 
+
 ### Subject Alternative Names and Authentication
 
  **Subject Alternative Names (SANs) in Certificates:** SAN is an extension in X.509 certificates that allows additional identities (like DNS names, email addresses, IPs, or User Principal Names - UPNs) to be associated with the certificate.
