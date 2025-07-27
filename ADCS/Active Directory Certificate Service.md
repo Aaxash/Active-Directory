@@ -103,7 +103,7 @@ The second set of restrictions shown in the issuance requirements are the settin
 - "This number of authorized signatures" controls the number of signatures required in the CSR for the CA to accept it. 
 - "Application policy" defines the EKU OIDs that the CSR signing certificate must have. 
 
-![[Pasted image 20250727231925.png]]
+![](../assets/Pasted%20image%2020250727231925.png)
 
 A Common use for these both settings is for enrollment agents. 
 
