@@ -24,9 +24,11 @@ Digital certificates  in **Active Directory Certificate Services (AD CS)** fol
 | **Extended Key Usage (EKU)**       | Defines the certificate’s purpose via **OIDs** (e.g., Client Auth, Code Signing).                               |
 | **Signature Algorithm**            | Algorithm used to sign the certificate (e.g., SHA256-RSA, ECDSA).                                               |
 | **Signature**                      | The CA’s digital signature (proves authenticity).                                                               |
-|                                    |                                                                                                                 |
-|                                    |                                                                                                                 |
+|                                    |                                       |
+
 These are some EKUs:
+
+
 
 | **EKU (OID)**                | **Friendly Name**                     | **Purpose**                                                                      |
 | ---------------------------- | ------------------------------------- | -------------------------------------------------------------------------------- |
@@ -138,14 +140,6 @@ Schannel is Microsoft's implementation of the TLS/SSL protocols, Windows uses it
 - The server then validates the certificate is correct and grants the user access assuming everything is okay. 
 - By default, not many protocols in AD environments support AD authentication via Schannel out of the box. RDP and IIS support client authentication using Schannel, but it requires additional configuration.
 - One protocol that does commonly work – assuming AD CS has been setup - is LDAPS (a.k.a., LDAP over SSL/TLS).
-
-
-So where, and how, are these certificates stored? Specifically, since a working Windows .pfx certificate file is the combination of a public certificate and private key, where and how are both the certificate and its associated private key certificate stored? 
-
-- One option is for private keys is to store them on a smart card.
-- If the machine has a Trusted Platform Module (TPM), Windows could store the private key in the TPM if AD CS has a certificate template supporting it
-- The CA server could also protect its private key using a Hardware Security Module (HSM).
-
 
 
 
