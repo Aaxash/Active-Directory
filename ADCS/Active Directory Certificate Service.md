@@ -7,10 +7,10 @@ AD CS was introduced in **Windows 2000** and can be deployed in two primary co
 1. **Standalone CA** – Operates independently of Active Directory (AD), typically used in offline root CA scenarios.
 2. **Enterprise CA** – Integrates with AD, enabling automated certificate enrollment and management for domain-joined systems.
 
-### Digital certificates
+## Digital certificates
 Digital certificates  in **Active Directory Certificate Services (AD CS)** follow the **X.509 standard**, which defines the structure and fields of a certificate. These certificates are **digitally signed documents** used for encryption, Digital signatures (e.g., code signing, S/MIME), authentication (e.g., smart card logon, client/server auth).
 
-## **Key Fields in an X.509 Certificate**
+### **Key Fields in an X.509 Certificate**
 
 | **Field**                          | **Description**                                                                                                 |
 | ---------------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -38,7 +38,8 @@ These are some EKUs:
 | **`1.3.6.1.5.5.7.3.2`**      | `Client Authentication`               | Sometimes required for **smartcard logon** CSRs.                                 |
 | **`1.3.6.1.5.5.7.3.4`**      | `Secure Email`                        | Required for **S/MIME signing** requests.                                        |
 | `1.3.6.1.4.1.311.20.2.2`     | `Smart Card Logon`                    | Required for Smart Card Logons                                                   |
-### Certificate Template
+
+## Certificate Template
 A **certificate template** is a preconfigured blueprint in AD CS that defines the rules and settings for certificates issued by an **Enterprise CA**. It controls:
 
 - **Certificate Properties**: Validity period, key length, encryption algorithms.
@@ -46,7 +47,7 @@ A **certificate template** is a preconfigured blueprint in AD CS that defines 
 - **Permissions**: Who can request/enroll (e.g., users, devices, security groups).
 
 
-### Certificate Enrollment
+## Certificate Enrollment
 To obtain a certificate from AD CS, clients go through a process called enrollment. 
 a user can enroll for a certificate if it has necessary rights to do so, else Enterprise CA denied all enrollment request.
 ### Enrollment Rights
@@ -94,13 +95,10 @@ So, what is happening behind the scenes when a user enrolls in a certificate?
 ### Issuance Requirements
 
 In addition to the certificate template and Enterprise CA access control restrictions, there are two certificate template settings we have seen used to control certificate enrollment. These are known as issuance requirements:
-#### Manager Approval
 
-The first restriction is “CA certificate manager approval”, which puts all certificate requests based on the template into the pending state, which requires a CA certificate manager to approve or deny the request before the certificate is issued
+The first restriction is “**CA certificate manager approval**”, which puts all certificate requests based on the template into the pending state, which requires a CA certificate manager to approve or deny the request before the certificate is issued
 
-
-
-The second set of restrictions shown in the issuance requirements are the settings “This number of authorized signatures” and the “Application policy”. 
+The second set of restrictions shown in the issuance requirements are the settings “**This number of authorized signatures**” and the “**Application policy**”. 
 
 - "This number of authorized signatures" controls the number of signatures required in the CSR for the CA to accept it. 
 - "Application policy" defines the EKU OIDs that the CSR signing certificate must have. 
@@ -121,7 +119,8 @@ A Common use for these both settings is for enrollment agents.
  - For example, if an attacker can request a client authentication certificate that has a domain administrator SAN field, and the CA issues the certificate without validating SAN, the attacker can authenticate as that domain admin.
 
 Active Directory (AD) supports certificate-based authentication primarily through two protocols: **Kerberos (PKINIT)** and **Secure Channel (Schannel)**.
-#### Kerberos Authentication 
+
+### Kerberos Authentication 
 
 PKINIT is the Kerberos extension that enables certificate-based pre-authentication. The process works as follows:
 - A user signs a Kerberos Ticket Granting Ticket (TGT) request with their **X.509 certificate** using their **private key** (associated with their certificate).
@@ -131,7 +130,7 @@ PKINIT is the Kerberos extension that enables certificate-based pre-authenticati
 - Confirms the **digital signature** using the user’s public key.        
 - If all checks pass, the DC issues a TGT, allowing the user to access resources.
 
-#### Secure Channel (Schannel) Authentication
+### Secure Channel (Schannel) Authentication
 
 Schannel is Microsoft's implementation of the TLS/SSL protocols, Windows uses it when establishing TLS/SSL connections. Schannel also supports client authentication, enabling a remote server to verify the identity of the connecting user. It accomplishes this using PKI, with certificates being the primary credential. 
 
