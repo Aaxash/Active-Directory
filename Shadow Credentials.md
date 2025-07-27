@@ -11,7 +11,7 @@ Active Directory uses the Kerberos protocol to securely authenticate users and s
 3. **TGS Exchange**: Client uses the TGT to request service tickets.
 
 
-## **Problems with Traditional Kerberos
+## **Problems with Traditional Kerberos**
 
 Traditional Kerberos authentication relies on **symmetric key cryptography** (where the client and server share a secret key derived from the user’s password)
 
@@ -91,3 +91,7 @@ The attacker needs permissions like **GenericWrite** or **GenericAll**  over
 4. Using alice TGT to get shell on DC01.
 
 ![image info](./assets/Pasted%20image%2020250721180400.png)
+
+
+
+
