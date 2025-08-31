@@ -1,7 +1,4 @@
-.obsidian/workspaces.json
-.obsidian/workspace
-.obsidian/workspace.json
-.obsidian/cache
+.obsidian/
 .trash/
 .DS_Store
 .vault-stats

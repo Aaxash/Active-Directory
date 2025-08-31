@@ -1,4 +1,3 @@
-
 # Windows Data Protection API
 
 DPAPI (Data Protection Application Programming Interface) is a simple cryptographic application programming interface available as a built-in component in Windows 2000 and later versions of Microsoft Windows operating systems. 
